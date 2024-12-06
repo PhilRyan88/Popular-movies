@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button>popularity</button>
+    <div></div>
+    <script>
+      async function GetData() {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYmY5NDQ1ODliMGY2NDg2MDU5MGVjNDY0MjIwMDI2YSIsIm5iZiI6MTczMjI5MTcxNy42MTY5OTk5LCJzdWIiOiI2NzQwYWM4NTY4ODIzMDA0Y2E5YzVlODgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.kNjbaR9f_E4oFuP37HWIGoByWs9pdFfdef6WUalL71A",
+          },
+        };
+        try {
+          const url = await fetch(
+            "https://api.themoviedb.org/3/person/popular?language=en-US&page=1",
+            options
+          );
+          const data = await url.json();
+          console.log(data);
+          var btn = document.querySelector("button");
+          var div = document.querySelector("div");
+          btn.addEventListener("click", () => {
+            data.results.map((item) => {
+              console.log(item);
+              var title = document.createElement("p");
+              var img = document.createElement("img");
+              var divTag = document.createElement("div");
+              img.src = `https://image.tmdb.org/t/p/w500/${item.profile_path}`;
+
+              title.innerHTML = `Title : ${item.name}&nbsp; &nbsp; &nbsp; &nbsp; 
+              Original Name : ${item.original_name} &nbsp; &nbsp; &nbsp; &nbsp; 
+               Popularity : ${item.popularity}`;
+
+              divTag.appendChild(img);
+              divTag.appendChild(title);
+              div.appendChild(divTag);
+            });
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      GetData();
+    </script>
+  </body>
+</html>

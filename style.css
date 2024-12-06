@@ -1,0 +1,13 @@
+div {
+  height: 300px;
+  width: 300px;
+  border: 1px solid;
+  position: relative;
+  top: 20px;
+  margin-top: 10px;
+}
+img {
+  height: 240px;
+  width: 250px;
+  object-fit: contain;
+}
